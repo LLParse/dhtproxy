@@ -1,0 +1,18 @@
+[Unit]
+Description=DHT Proxy server
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/dhtproxy -listen=:4242 -maxNodes=1000 -maxWant=1000 -rateLimit=200 -workers=4
+KillMode=process
+Restart=always
+RestartPreventExitStatus=255
+RuntimeDirectory=dhtproxy
+RuntimeDirectoryMode=0755
+WatchdogSec=86400
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+Alias=dhtproxy.service
+
